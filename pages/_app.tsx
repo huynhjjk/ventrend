@@ -8,7 +8,6 @@ import NextSeo from 'next-seo';
 import SEO from '../next-seo.config';
 
 class MyApp extends App {
-  // ts-ignore
   static async getInitialProps({ Component, ctx }) {
     let pageProps = {};
     if (Component.getInitialProps) {
@@ -22,7 +21,6 @@ class MyApp extends App {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles) {
-      // ts-ignore
       jssStyles.parentNode.removeChild(jssStyles);
     }
   }
