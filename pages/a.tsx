@@ -1,22 +1,20 @@
 import React from 'react'
-import fetch from 'isomorphic-unfetch'
+import 'isomorphic-unfetch'
 
-const A = (props:any) => (
-  <div>
-    <h1>{props.show.name}</h1>
-    <p>{props.show.summary.replace(/<[/]?p>/g, '')}</p>
-    <img src={props.show.image.medium} />
-  </div>
-)
+export default class extends React.Component {
+    static async getInitialProps() {
+        const apiUrl = 'http://localhost:3000/a';
+        const params = '';
+        const res = await fetch(apiUrl + params);
+        const data = await res.json();
+        return  { data }
+    }
 
-A.getInitialProps = async function(context: any) {
-  const { id } = context.query
-  const res = await fetch(`http://localhost:3000/a`)
-  const show = await res.json()
-
-  console.log(`Fetched show: ${show.name}`)
-
-  return { show }
+    render() {
+        return (
+            <div>
+                <h1>{this.props.data}</h1>
+            </div>
+        )
+    }
 }
-
-export default A
