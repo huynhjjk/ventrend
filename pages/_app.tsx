@@ -8,6 +8,7 @@ import NextSeo from 'next-seo';
 import SEO from '../next-seo.config';
 
 class MyApp extends App {
+  // ts-ignore
   static async getInitialProps({ Component, ctx }) {
     let pageProps = {};
     if (Component.getInitialProps) {
