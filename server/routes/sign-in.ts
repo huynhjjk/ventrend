@@ -1,4 +1,4 @@
-export class bRoutes {
+export class signInRoutes {
 
     public routes(app: any, server: any): void {
         server.get('/sign-in', (req: any, res: any) => {

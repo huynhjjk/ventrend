@@ -1,4 +1,6 @@
 import { aRoutes } from './routes/a';
+import { bRoutes } from './routes/b';
+import { signInRoutes } from './routes/sign-in';
 const express = require('express');
 const next = require('next');
 class App {
@@ -7,15 +9,17 @@ class App {
     public app: any = next({ dev: this.dev });
     public handle = this.app.getRequestHandler();
     public aRoutes: aRoutes = new aRoutes();
-    public bRoutes: aRoutes = new aRoutes();
+    public bRoutes: bRoutes = new bRoutes();
+    public signInRoutes: signInRoutes = new signInRoutes();
 
     constructor() {
       this.server = express();
       this.app
       .prepare()
       .then(() => {
-        // this.aRoutes.routes(this.app, this.server);
-        // this.bRoutes.routes(this.app, this.server);
+        this.aRoutes.routes(this.app, this.server);
+        this.bRoutes.routes(this.app, this.server);
+        this.signInRoutes.routes(this.app, this.server);
     
         this.server.get('*', (req: any, res: any) => {
           return this.handle(req, res)
