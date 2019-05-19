@@ -1,17 +1,15 @@
-# TypeScript Next.js example
+# Custom server with TypeScript + Nodemon example
 
-This is a really simple project that show the usage of Next.js with TypeScript.
-
-## How to use it?
+## How to use
 
 ### Using `create-next-app`
 
 Execute [`create-next-app`](https://github.com/segmentio/create-next-app) with [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) or [npx](https://github.com/zkat/npx#readme) to bootstrap the example:
 
 ```bash
-npx create-next-app --example with-typescript with-typescript-app
+npx create-next-app --example custom-server-typescript custom-server-typescript-app
 # or
-yarn create next-app --example with-typescript with-typescript-app
+yarn create next-app --example custom-server-typescript custom-server-typescript-app
 ```
 
 ### Download manually
@@ -19,8 +17,8 @@ yarn create next-app --example with-typescript with-typescript-app
 Download the example:
 
 ```bash
-curl https://codeload.github.com/zeit/next.js/tar.gz/canary | tar -xz --strip=2 next.js-canary/examples/with-typescript
-cd with-typescript
+curl https://codeload.github.com/zeit/next.js/tar.gz/canary | tar -xz --strip=2 next.js-canary/examples/custom-server-typescript
+cd custom-server-typescript
 ```
 
 Install it and run:
@@ -33,8 +31,14 @@ yarn
 yarn dev
 ```
 
+Deploy it to the cloud with [now](https://zeit.co/now) ([download](https://zeit.co/download))
+
+```bash
+now
+```
+
 ## The idea behind the example
 
-Use the [@zeit/next-typescript](https://github.com/zeit/next-plugins/tree/master/packages/next-typescript) plugin to inject [@babel/preset-typescript](https://github.com/babel/babel/tree/master/packages/babel-preset-typescript) into Next.js, allowing for fast TypeScript transpilation. It also implements a `tsconfig.json` as recommended by [the @zeit/next-typescript plugin page](https://github.com/zeit/next-plugins/tree/master/packages/next-typescript/#readme).
-
-A `type-check` script is also added to `package.json`, which runs TypeScript's `tsc` CLI in `noEmit` mode to run type-checking separately. You can then include this in your `test` scripts, say, for your CI process.
+The example shows how you can use [TypeScript](https://typescriptlang.com) on both the server and the client while using [Nodemon](https://nodemon.io/) to live reload the server code without affecting the Next.js universal code.
+Server entry point is `server/index.ts` in development and `production-server/index.js` in production.
+The second directory should be added to `.gitignore`.
