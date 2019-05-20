@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from '../next-routes.module';
 import * as fetchImport from 'isomorphic-unfetch'
 const fetch = (fetchImport.default || fetchImport) as typeof fetchImport.default
-
+import Nav from '../components/nav';
+import Footer from '../components/footer';
 export default class extends React.Component {
     static async getInitialProps() {
       const apiUrl = 'http://localhost:3000/api/a';
@@ -15,6 +16,7 @@ export default class extends React.Component {
   render() {
       return (
           <div>
+              <Nav />
               <ul>
                 <li><Link route='/a'><a>a</a></Link></li>
                 <li><Link route='/b'><a>b</a></Link></li>
@@ -27,6 +29,7 @@ export default class extends React.Component {
                       })
                   }
               </div>
+              <Footer />
           </div>
       )
   }
