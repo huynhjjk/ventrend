@@ -265,7 +265,8 @@ class EnhancedTable extends React.Component {
     const { classes } = this.props;
     const { data, order, orderBy, selected, rowsPerPage, page, query } = this.state;
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
-    const filteredData = query ? data.filter(item => item['name'].includes(query)) : data;
+    const filteredData = query ?
+    data.filter(item => (item['name'].toLowerCase()).includes(query.toLowerCase())) : data;
 
     return (
       <Box>
