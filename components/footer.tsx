@@ -11,7 +11,7 @@ const styles = (theme: { spacing: { unit: number; }; palette: { divider: any; };
     footer: {
       marginTop: theme.spacing.unit * 8,
       borderTop: `1px solid ${theme.palette.divider}`,
-      padding: `${theme.spacing.unit * 6}px 0`,
+      padding: theme.spacing.unit * 3,
     },
   });
 };
