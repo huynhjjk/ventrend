@@ -108,7 +108,7 @@ EnhancedTableHead.propTypes = {
 
 const toolbarStyles = theme => ({
   root: {
-    paddingRight: theme.spacing.unit,
+    paddingRight: theme.spacing(),
   },
   highlight:
     theme.palette.type === 'light'
@@ -181,7 +181,7 @@ EnhancedTableToolbar = withStyles(toolbarStyles)(EnhancedTableToolbar);
 const styles = theme => ({
   root: {
     width: '100%',
-    marginTop: theme.spacing.unit * 3,
+    marginTop: theme.spacing(3),
   },
   table: {
     minWidth: 1020,
@@ -260,7 +260,6 @@ class EnhancedTable extends React.Component {
 }
 
   render() {
-    console.log(this.props.data);
     const { classes } = this.props;
     const { data, order, orderBy, selected, rowsPerPage, page } = this.state;
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);

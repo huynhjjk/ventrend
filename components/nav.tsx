@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from '../next-routes.module';
 
-const styles = (theme: { palette: { common: { white: any; }; grey: any[]; }; spacing: { unit: number; }; breakpoints: { up: { (arg0: number): void; (arg0: string): void; }; }; }) => ({
+const styles = (theme: any) => ({
   '@global': {
     body: {
       backgroundColor: theme.palette.common.white,
@@ -19,12 +19,13 @@ const styles = (theme: { palette: { common: { white: any; }; grey: any[]; }; spa
   },
   toolbarTitle: {
     flex: 1,
+    cursor: 'pointer'
   },
   layout: {
     width: 'auto',
-    marginLeft: theme.spacing.unit * 3,
-    marginRight: theme.spacing.unit * 3,
-    [theme.breakpoints.up(900 + theme.spacing.unit * 3 * 2)]: {
+    marginLeft: theme.spacing(3),
+    marginRight: theme.spacing(3),
+    [theme.breakpoints.up(900 + theme.spacing(6))]: {
       width: 900,
       marginLeft: 'auto',
       marginRight: 'auto',
@@ -33,7 +34,7 @@ const styles = (theme: { palette: { common: { white: any; }; grey: any[]; }; spa
   heroContent: {
     maxWidth: 600,
     margin: '0 auto',
-    padding: `${theme.spacing.unit * 8}px 0 ${theme.spacing.unit * 6}px`,
+    padding: theme.spacing(8, 0, 6),
   },
   cardHeader: {
     backgroundColor: theme.palette.grey[200],
@@ -42,16 +43,16 @@ const styles = (theme: { palette: { common: { white: any; }; grey: any[]; }; spa
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'baseline',
-    marginBottom: theme.spacing.unit * 2,
+    marginBottom: theme.spacing(2),
   },
   cardActions: {
     [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing.unit * 2,
+      paddingBottom: theme.spacing(2),
     },
   }
 });
 
-function Pricing(props) {
+function Pricing(props: any) {
   const { classes } = props;
 
   return (
