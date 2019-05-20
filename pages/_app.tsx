@@ -2,7 +2,7 @@ import React from 'react';
 import App, { Container } from 'next/app';
 import { ThemeProvider } from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import theme from '../assets/theme';
+import theme from '../assets/material-ui/theme';
 import NextSeo from 'next-seo';
 // import your default seo configuration
 import SEO from '../next-seo.config';
