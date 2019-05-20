@@ -14,16 +14,10 @@ export default class extends React.Component {
   }
 
   render() {
-      return (
+    return (
         <Main>
-            <Table />
-            <div className="section">
-                {
-                    this.props.data.map(function(item: any, i: any) {
-                        return <div className="row" key={i}>{item.name}</div>
-                    })
-                }
-            </div>
+            <h1>Search</h1>
+            <Table data={this.props.data} />
         </Main>
       )
   }

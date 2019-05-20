@@ -66,10 +66,10 @@ function Pricing(props: any) {
             </Typography>
           </Link>
           <Link route="/features">
-            <Button color="secondary">Features</Button>
+            <Button color="inherit">Features</Button>
           </Link>
           <Link route="/sign-in">
-            <Button color="secondary" variant="outlined">
+            <Button color="inherit" variant="outlined">
               Sign In
             </Button>
           </Link>

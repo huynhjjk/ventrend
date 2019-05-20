@@ -44,8 +44,8 @@ function getSorting(order, orderBy) {
 }
 
 const rows = [
-  { id: 'id', numeric: true, disablePadding: false, label: 'ID' },
-  { id: 'name', numeric: true, disablePadding: false, label: 'Name' }
+  { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
+  { id: 'audience_size', numeric: true, disablePadding: false, label: 'Audience Size' }
 ];
 
 class EnhancedTableHead extends React.Component {
@@ -108,7 +108,7 @@ EnhancedTableHead.propTypes = {
 
 const toolbarStyles = theme => ({
   root: {
-    paddingRight: theme.spacing(),
+    paddingRight: theme.spacing(0),
   },
   highlight:
     theme.palette.type === 'light'
@@ -196,9 +196,9 @@ class EnhancedTable extends React.Component {
     order: 'asc',
     orderBy: 'name',
     selected: [],
-    data: [],
+    data: this.props.data,
     page: 0,
-    rowsPerPage: 5,
+    rowsPerPage: 10,
   };
 
   handleRequestSort = (event, property) => {
@@ -251,14 +251,6 @@ class EnhancedTable extends React.Component {
 
   isSelected = id => this.state.selected.indexOf(id) !== -1;
 
-  static async getInitialProps() {
-    const apiUrl = 'http://localhost:3000/api/a';
-    const params = '';
-    const res = await fetch(apiUrl + params);
-    const data = await res.json();
-    return data;
-}
-
   render() {
     const { classes } = this.props;
     const { data, order, orderBy, selected, rowsPerPage, page } = this.state;
@@ -296,11 +288,9 @@ class EnhancedTable extends React.Component {
                         <Checkbox checked={isSelected} />
                       </TableCell>
                       <TableCell component="th" scope="row" padding="none">
-                        {n.id}
-                      </TableCell>
-                      <TableCell component="th" scope="row" padding="none">
                         {n.name}
                       </TableCell>
+                      <TableCell align="right">{n.audience_size}</TableCell>
                     </TableRow>
                   );
                 })}
@@ -313,7 +303,7 @@ class EnhancedTable extends React.Component {
           </Table>
         </div>
         <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPageOptions={[5, 10, 25, 100]}
           component="div"
           count={data.length}
           rowsPerPage={rowsPerPage}
