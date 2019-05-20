@@ -18,6 +18,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
+import Link from '@material-ui/core/Link';
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -45,7 +46,9 @@ function getSorting(order, orderBy) {
 
 const rows = [
   { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
-  { id: 'audience_size', numeric: true, disablePadding: false, label: 'Audience Size' }
+  { id: 'audience_size', numeric: true, disablePadding: false, label: 'Audience Size' },
+  { numeric: false, disablePadding: true, label: 'Google' },
+  { numeric: false, disablePadding: true, label: 'Facebook' },
 ];
 
 class EnhancedTableHead extends React.Component {
@@ -277,20 +280,31 @@ class EnhancedTable extends React.Component {
                   return (
                     <TableRow
                       hover
-                      onClick={event => this.handleClick(event, n.id)}
                       role="checkbox"
                       aria-checked={isSelected}
                       tabIndex={-1}
                       key={n.id}
                       selected={isSelected}
                     >
-                      <TableCell padding="checkbox">
+                      <TableCell padding="checkbox" onClick={event => this.handleClick(event, n.id)}>
                         <Checkbox checked={isSelected} />
                       </TableCell>
-                      <TableCell component="th" scope="row" padding="none">
+                      <TableCell component="th" scope="row" padding="none" onClick={event => this.handleClick(event, n.id)}>
                         {n.name}
                       </TableCell>
-                      <TableCell align="right">{n.audience_size}</TableCell>
+                      <TableCell align="right" onClick={event => this.handleClick(event, n.id)}>
+                        {n.audience_size}
+                      </TableCell>
+                      <TableCell align="left">
+                        <Link href={'https://www.google.com/search?q=' + n.name} target="_blank">
+                          {'https://www.google.com/search?q=' + n.name}
+                        </Link>
+                      </TableCell>
+                      <TableCell align="left">
+                        <Link href={'https://www.facebook.com/search/pages/?q=' + n.name} target="_blank">
+                          {'https://www.facebook.com/search/pages/?q=' + n.name}
+                        </Link>
+                      </TableCell>
                     </TableRow>
                   );
                 })}
