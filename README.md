@@ -1,4 +1,4 @@
-# NextJS Application with Custom Express Server, Nodemon, and using TypEscript
+# NextJS Application with Custom Express Server, Nodemon, and using TypeScript
 
 ### Download
 
