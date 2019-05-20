@@ -19,6 +19,12 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 import Link from '@material-ui/core/Link';
+import InputBase from '@material-ui/core/InputBase';
+import Divider from '@material-ui/core/Divider';
+import MenuIcon from '@material-ui/icons/Menu';
+import SearchIcon from '@material-ui/icons/Search';
+import DirectionsIcon from '@material-ui/icons/Directions';
+import { Box } from '@material-ui/core';
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -47,8 +53,8 @@ function getSorting(order, orderBy) {
 const rows = [
   { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
   { id: 'audience_size', numeric: true, disablePadding: false, label: 'Audience Size' },
-  { id: 'name', numeric: false, disablePadding: true, label: 'Google' },
-  { id: 'name', numeric: false, disablePadding: true, label: 'Facebook' },
+  { numeric: false, disablePadding: true, label: 'Google' },
+  { numeric: false, disablePadding: true, label: 'Facebook' },
 ];
 
 class EnhancedTableHead extends React.Component {
@@ -202,6 +208,7 @@ class EnhancedTable extends React.Component {
     data: this.props.data,
     page: 0,
     rowsPerPage: 10,
+    query: ''
   };
 
   handleRequestSort = (event, property) => {
@@ -256,82 +263,90 @@ class EnhancedTable extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { data, order, orderBy, selected, rowsPerPage, page } = this.state;
+    const { data, order, orderBy, selected, rowsPerPage, page, query } = this.state;
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
+    const filteredData = query ? data.filter(item => item['name'].includes(query)) : data;
 
     return (
-      <Paper className={classes.root}>
-        <EnhancedTableToolbar numSelected={selected.length} />
-        <div className={classes.tableWrapper}>
-          <Table className={classes.table} aria-labelledby="tableTitle">
-            <EnhancedTableHead
-              numSelected={selected.length}
-              order={order}
-              orderBy={orderBy}
-              onSelectAllClick={this.handleSelectAllClick}
-              onRequestSort={this.handleRequestSort}
-              rowCount={data.length}
-            />
-            <TableBody>
-              {stableSort(data, getSorting(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map(n => {
-                  const isSelected = this.isSelected(n.id);
-                  return (
-                    <TableRow
-                      hover
-                      role="checkbox"
-                      aria-checked={isSelected}
-                      tabIndex={-1}
-                      key={n.id}
-                      selected={isSelected}
-                    >
-                      <TableCell padding="checkbox" onClick={event => this.handleClick(event, n.id)}>
-                        <Checkbox checked={isSelected} />
-                      </TableCell>
-                      <TableCell component="th" scope="row" padding="none" onClick={event => this.handleClick(event, n.id)}>
-                        {n.name}
-                      </TableCell>
-                      <TableCell align="right" onClick={event => this.handleClick(event, n.id)}>
-                        {n.audience_size}
-                      </TableCell>
-                      <TableCell align="left">
-                        <Link href={'https://www.google.com/search?q=' + n.name} target="_blank">
-                          {'https://www.google.com/search?q=' + n.name}
-                        </Link>
-                      </TableCell>
-                      <TableCell align="left">
-                        <Link href={'https://www.facebook.com/search/pages/?q=' + n.name} target="_blank">
-                          {'https://www.facebook.com/search/pages/?q=' + n.name}
-                        </Link>
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
-              {emptyRows > 0 && (
-                <TableRow style={{ height: 49 * emptyRows }}>
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </div>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25, 100]}
-          component="div"
-          count={data.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          backIconButtonProps={{
-            'aria-label': 'Previous Page',
-          }}
-          nextIconButtonProps={{
-            'aria-label': 'Next Page',
-          }}
-          onChangePage={this.handleChangePage}
-          onChangeRowsPerPage={this.handleChangeRowsPerPage}
-        />
-      </Paper>
+      <Box>
+        <Paper className={classes.root} elevation={1}>
+          <InputBase fullWidth value={this.state.query} onChange={(event) => this.setState({ query: event.target.value })}/>
+        </Paper>
+        <Paper className={classes.root}>
+          <EnhancedTableToolbar numSelected={selected.length} />
+          <div className={classes.tableWrapper}>
+            <Table className={classes.table} aria-labelledby="tableTitle">
+              <EnhancedTableHead
+                numSelected={selected.length}
+                order={order}
+                orderBy={orderBy}
+                onSelectAllClick={this.handleSelectAllClick}
+                onRequestSort={this.handleRequestSort}
+                rowCount={filteredData.length}
+              />
+              <TableBody>
+                {stableSort(
+                  filteredData,
+                  getSorting(order, orderBy))
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map(n => {
+                    const isSelected = this.isSelected(n.id);
+                    return (
+                      <TableRow
+                        hover
+                        role="checkbox"
+                        aria-checked={isSelected}
+                        tabIndex={-1}
+                        key={n.id}
+                        selected={isSelected}
+                      >
+                        <TableCell padding="checkbox" onClick={event => this.handleClick(event, n.id)}>
+                          <Checkbox checked={isSelected} />
+                        </TableCell>
+                        <TableCell component="th" scope="row" padding="none" onClick={event => this.handleClick(event, n.id)}>
+                          {n.name}
+                        </TableCell>
+                        <TableCell align="right" onClick={event => this.handleClick(event, n.id)}>
+                          {n.audience_size}
+                        </TableCell>
+                        <TableCell align="left">
+                          <Link href={'https://www.google.com/search?q=' + n.name} target="_blank">
+                            {'https://www.google.com/search?q=' + n.name}
+                          </Link>
+                        </TableCell>
+                        <TableCell align="left">
+                          <Link href={'https://www.facebook.com/search/pages/?q=' + n.name} target="_blank">
+                            {'https://www.facebook.com/search/pages/?q=' + n.name}
+                          </Link>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+                {emptyRows > 0 && (
+                  <TableRow style={{ height: 49 * emptyRows }}>
+                    <TableCell colSpan={6} />
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </div>
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 25, 100]}
+            component="div"
+            count={filteredData.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            backIconButtonProps={{
+              'aria-label': 'Previous Page',
+            }}
+            nextIconButtonProps={{
+              'aria-label': 'Next Page',
+            }}
+            onChangePage={this.handleChangePage}
+            onChangeRowsPerPage={this.handleChangeRowsPerPage}
+          />
+        </Paper>
+      </Box>
     );
   }
 }
