@@ -44,7 +44,7 @@ function getSorting(order, orderBy) {
 }
 
 const rows = [
-  { id: 'id', numeric: true, disablePadding: true, label: 'ID' },
+  { id: 'id', numeric: true, disablePadding: false, label: 'ID' },
   { id: 'name', numeric: true, disablePadding: false, label: 'Name' }
 ];
 
@@ -147,7 +147,7 @@ let EnhancedTableToolbar = props => {
           </Typography>
         ) : (
           <Typography variant="h6" id="tableTitle">
-            Nutrition
+            Suggestions
           </Typography>
         )}
       </div>

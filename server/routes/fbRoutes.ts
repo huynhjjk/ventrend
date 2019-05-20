@@ -4,7 +4,7 @@ const faceBookSuggestionsMock = require('./../../assets/mocks/facebook-suggestio
 export class faceBookRoutes {
 
     public routes(server: any): void {
-        server.get('/api/a', (req: any, res: any) => {
+        server.get('/api/suggestions', (req: any, res: any) => {
             this.getFaceBookSuggestions(req, res);
         });
     }

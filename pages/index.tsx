@@ -2,10 +2,11 @@ import React from 'react';
 import * as fetchImport from 'isomorphic-unfetch'
 const fetch = (fetchImport.default || fetchImport) as typeof fetchImport.default
 import Main from '../layouts/main';
+import Table from '../components/table';
 
 export default class extends React.Component {
     static async getInitialProps() {
-      const apiUrl = 'http://localhost:3000/api/a';
+      const apiUrl = 'http://localhost:3000/api/suggestions';
       const params = '';
       const res = await fetch(apiUrl + params);
       const data = await res.json();
@@ -15,7 +16,7 @@ export default class extends React.Component {
   render() {
       return (
         <Main>
-            {/* <Table /> */}
+            <Table />
             <div className="section">
                 {
                     this.props.data.map(function(item: any, i: any) {
