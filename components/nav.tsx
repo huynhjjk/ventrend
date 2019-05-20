@@ -58,7 +58,7 @@ function Pricing(props: any) {
   return (
     <React.Fragment>
       <CssBaseline />
-      <AppBar position="static" color="default" className={classes.appBar}>
+      <AppBar position="static" color="primary" className={classes.appBar}>
         <Toolbar>
           <Link route="/">
             <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
@@ -66,10 +66,10 @@ function Pricing(props: any) {
             </Typography>
           </Link>
           <Link route="/features">
-            <Button>Features</Button>
+            <Button color="secondary">Features</Button>
           </Link>
           <Link route="/sign-in">
-            <Button color="primary" variant="outlined">
+            <Button color="secondary" variant="outlined">
               Sign In
             </Button>
           </Link>
