@@ -1,3 +1,11 @@
 import React from 'react'
+export default class extends React.Component {
+    static async getInitialProps() {
+    }
 
-export default () => <div>b</div>
+    render() {
+        return (
+            <div>b</div>
+        )
+    }
+}

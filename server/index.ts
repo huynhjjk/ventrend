@@ -1,28 +1,23 @@
-import { aRoutes } from './routes/a';
-import { bRoutes } from './routes/b';
-import { signInRoutes } from './routes/sign-in';
+import { faceBookRoutes } from './routes/fbRoutes';
 const express = require('express');
 const next = require('next');
-const routes = require('./../routes');
+const nextRoutes = require('./../next-routes.module');
+
 class App {
     public server: any;
     public dev: boolean = process.env.NODE_ENV !== 'production';
     public app: any = next({ dev: this.dev });
-    public handle = routes.getRequestHandler(this.app)
-    public aRoutes: aRoutes = new aRoutes();
-    public bRoutes: bRoutes = new bRoutes();
-    public signInRoutes: signInRoutes = new signInRoutes();
+    public handle = nextRoutes.getRequestHandler(this.app)
+
+    public faceBookRoutes: faceBookRoutes = new faceBookRoutes();
 
     constructor() {
       this.server = express();
-      this.aRoutes.routes(this.server);
+      this.faceBookRoutes.routes(this.server);
 
       this.app
       .prepare()
       .then(() => {
-        // this.bRoutes.routes(this.app, this.server);
-        // this.signInRoutes.routes(this.app, this.server);
-    
         this.server.get('*', (req: any, res: any) => {
           return this.handle(req, res)
         })
