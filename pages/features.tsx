@@ -1,5 +1,6 @@
 import React from 'react'
 import NextSeo from 'next-seo';
+import Main from '../layouts/main';
 
 export default class extends React.Component {
     static async getInitialProps() {
@@ -7,15 +8,15 @@ export default class extends React.Component {
 
     render() {
         return (
-            <div>
+            <Main>
                 <NextSeo
                     config={{
-                        title: 'A',
-                        description: 'A Description'
+                        title: 'Features',
+                        description: 'Features Description'
                     }}
                 />
-                <h1>A</h1>
-            </div>
+                <h1>Features</h1>
+            </Main>
         )
     }
 }

@@ -59,7 +59,7 @@ const classes = useStyles();
         <NextSeo
             config={{
                 title: 'Sign In',
-                description: 'Updated description as well'
+                description: 'Sign In description'
             }}
         />
     <Container component="main" maxWidth="xs">
@@ -69,7 +69,7 @@ const classes = useStyles();
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Sign In
         </Typography>
         <form className={classes.form} noValidate>
           <TextField
