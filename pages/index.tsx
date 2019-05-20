@@ -1,10 +1,10 @@
-import React from 'react'
-import Link from 'next/link'
+import React from 'react';
+import { Link } from './../routes';
 
 export default () => (
   <ul>
-    <li><Link href='/a' as='/a'><a>a</a></Link></li>
-    <li><Link href='/b' as='/b'><a>b</a></Link></li>
-    <li><Link href='/sign-in' as='/sign-in'><a>Sign-In</a></Link></li>
+    <li><Link route='/a'><a>a</a></Link></li>
+    <li><Link route='/b'><a>b</a></Link></li>
+    <li><Link route='/sign-in'><a>Sign-In</a></Link></li>
   </ul>
 )
