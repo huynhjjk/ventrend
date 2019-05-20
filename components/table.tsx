@@ -269,7 +269,7 @@ class EnhancedTable extends React.Component {
 
     return (
       <Box>
-        <Paper className={classes.root} elevation={1}>
+        <Paper>
           <InputBase fullWidth value={this.state.query} onChange={(event) => this.setState({ query: event.target.value })}/>
         </Paper>
         <Paper className={classes.root}>
