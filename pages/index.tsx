@@ -4,6 +4,8 @@ import * as fetchImport from 'isomorphic-unfetch'
 const fetch = (fetchImport.default || fetchImport) as typeof fetchImport.default
 import Nav from '../components/nav';
 import Footer from '../components/footer';
+import Table from '../components/table';
+
 export default class extends React.Component {
     static async getInitialProps() {
       const apiUrl = 'http://localhost:3000/api/a';
@@ -17,6 +19,7 @@ export default class extends React.Component {
       return (
           <div>
               <Nav />
+              {/* <Table /> */}
               <ul>
                 <li><Link route='/a'><a>a</a></Link></li>
                 <li><Link route='/b'><a>b</a></Link></li>

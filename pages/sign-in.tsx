@@ -58,7 +58,7 @@ const classes = useStyles();
     <>
         <NextSeo
             config={{
-                title: 'About us',
+                title: 'Sign In',
                 description: 'Updated description as well'
             }}
         />
