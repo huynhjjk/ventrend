@@ -5,9 +5,10 @@ import Main from '../layouts/main';
 import Table from '../components/table';
 
 export default class extends React.Component {
-    static async getInitialProps() {
+    static async getInitialProps(context) {
       const apiUrl = 'http://localhost:3000/api/suggestions';
-      const params = '';
+      const { q } = context.query;
+      const params = q ? `?q=${q}` : '';
       const res = await fetch(apiUrl + params);
       const data = await res.json();
       return data;
